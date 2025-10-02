@@ -50,12 +50,12 @@ for file_path in file_path_list:
 
     else:
         was_outside = True
-        print(f'Foi encontrado alteracoes fora das pastas padroes de projetos')
 
-
+print('----------------------------------------------------------------------------------------')
 if has_forbidden:
     print('Foi encontrado termos proibidos nos scripts')
 if was_outside:
     print('Foi encontrado modificações em arquivos fora das pastas determinadas')
+print('----------------------------------------------------------------------------------------')
 if has_forbidden or was_outside:
     exit(1)
