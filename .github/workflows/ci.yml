@@ -27,9 +27,9 @@ jobs:
       # with:
       #   since_last_remote_commit: true 
 
-    - name: 'List all changed files'
-      env:
-        ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+    # - name: 'List all changed files'
+    #   env:
+    #     ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
       
     - name: 'Install Python'
       uses: actions/setup-python@v6
