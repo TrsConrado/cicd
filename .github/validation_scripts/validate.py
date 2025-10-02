@@ -1,1 +1,1 @@
-print('hello world')
+print('fcuk the world')
