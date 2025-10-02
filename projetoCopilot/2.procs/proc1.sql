@@ -1,1 +1,4 @@
 SELECT * FROM TABLE1_PROJ_COPILOT;
+hml-dot
+
+prd-dot
