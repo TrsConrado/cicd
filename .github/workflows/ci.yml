@@ -37,7 +37,7 @@ jobs:
         python-version: '3.13' 
 
     - name: 'Run Validation Script'
-      run: python .github/validation_scripts/validate.py {{ env.ALL_CHANGED_FILES }}
+      run: python .github/validation_scripts/validate.py {{ steps.changed-files.outputs.all_changed_files }}
 
   # changed_files:
   #   runs-on: ubuntu-latest
