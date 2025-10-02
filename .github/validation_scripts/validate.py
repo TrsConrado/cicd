@@ -28,7 +28,6 @@ for file_path in file_path_list:
 
 
     if '1.tables' in file_path:
-        print('entrou em tables')
         for forbidden_term in ['dev-dot', 'hml-dot', 'prd-dot', 'replace']:
             if forbidden_term in contents.lower():
                 has_forbidden = True
@@ -39,23 +38,31 @@ for file_path in file_path_list:
                         print(f'Foi encontrado o termo proibido "{forbidden_term}" no arquivo "{file_path}", na linha {line_num} e coluna {column_num}')
 
     elif '2.procs' in file_path:
-        print('entrou em procs')
         for forbidden_term in ['dev-dot', 'hml-dot', 'prd-dot']:
             if forbidden_term in contents.lower():
                 has_forbidden = True
+                lines = contents.lower().splitlines()
+                for line_num, line in enumerate(lines):
+                    column_num = line.find(forbidden_term)
+                    if column_num != -1:
+                        print(f'Foi encontrado o termo proibido "{forbidden_term}" no arquivo "{file_path}", na linha {line_num} e coluna {column_num}')
 
     elif '3.funcs' in file_path:
-        print('entrou em funcs')
         for forbidden_term in ['dev-dot', 'hml-dot', 'prd-dot']:
             if forbidden_term in contents.lower():
                 has_forbidden = True
+                lines = contents.lower().splitlines()
+                for line_num, line in enumerate(lines):
+                    column_num = line.find(forbidden_term)
+                    if column_num != -1:
+                        print(f'Foi encontrado o termo proibido "{forbidden_term}" no arquivo "{file_path}", na linha {line_num} e coluna {column_num}')
     
     elif '.github/validation_scripts':
         print('Mudancas do script de validacao, sem problemas')
 
     else:
-        print('entrou no else')
         was_outside = True
+        print(f'Foi encontrado alteracoes fora das pastas padroes de projetos')
 
 
 if has_forbidden:
