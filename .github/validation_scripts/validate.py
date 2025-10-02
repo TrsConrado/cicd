@@ -5,23 +5,11 @@ parser.add_argument('file_list')
 
 file_path_list = parser.parse_args().file_list.split(' ')
 
-# file_path_list = [
-#     r'C:\Users\cgameiro\Documents\Projetos\cicd\projetoCopilot\1.tables\table1.sql',
-#     r'C:\Users\cgameiro\Documents\Projetos\cicd\projetoCopilot\1.tables\table2.sql',
-#     r'C:\Users\cgameiro\Documents\Projetos\cicd\projetoCopilot\1.tables\table3.sql',
-#     r'C:\Users\cgameiro\Documents\Projetos\cicd\projetoCopilot\2.procs\proc1.sql',
-#     r'C:\Users\cgameiro\Documents\Projetos\cicd\projetoCopilot\2.procs\proc2.sql',
-#     r'C:\Users\cgameiro\Documents\Projetos\cicd\projetoCopilot\2.procs\proc3.sql',
-#     r'C:\Users\cgameiro\Documents\Projetos\cicd\projetoCopilot\2.procs\proc4.sql',
-#     r'C:\Users\cgameiro\Documents\Projetos\cicd\projetoCopilot\2.procs\proc5.sql'
-# ]
-
 has_forbidden = False
 forbidden_location = {}
 was_outside = False
 
 for file_path in file_path_list:
-    print(file_path)
     with open(file_path, 'r') as file:
         contents = file.read()
 
@@ -55,10 +43,10 @@ for file_path in file_path_list:
                 for line_num, line in enumerate(lines):
                     column_num = line.find(forbidden_term)
                     if column_num != -1:
-                        print(f'Foi encontrado o termo proibido "{forbidden_term}" no arquivo "{file_path}", na linha {line_num} e coluna {column_num}')
+                        print(f'Foi encontrado o termo proibido "{forbidden_term}" no arquivo "{file_path}", na linha {line_num+1} e coluna {column_num+1}')
     
     elif '.github/validation_scripts':
-        print('Mudancas do script de validacao, sem problemas')
+        pass
 
     else:
         was_outside = True
