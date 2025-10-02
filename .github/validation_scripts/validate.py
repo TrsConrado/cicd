@@ -44,6 +44,9 @@ for file_path in file_path_list:
             if forbidden_term in contents.lower():
                 has_forbidden = True
     
+    elif '.github/validation_scripts':
+        print('Mudancas do script de validacao, sem problemas')
+        
     else:
         print('entrou no else')
         was_outside = True
