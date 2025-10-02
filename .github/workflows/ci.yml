@@ -26,4 +26,4 @@ jobs:
         python-version: '3.13' 
 
     - name: 'Run Validation Script'
-      run: python validate.py
+      run: python .github/validation_scripts/validate.py
