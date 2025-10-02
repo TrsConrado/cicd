@@ -2,8 +2,12 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('file_list')
+parser.add_argument('branch_name')
 
 file_path_list = parser.parse_args().file_list.split(' ')
+branch_name = parser.parse_args().branch_name
+
+print(branch_name)
 
 has_forbidden = False
 forbidden_location = {}
