@@ -53,6 +53,8 @@ for file_path in file_path_list:
         pass
     elif '.github/deployment_scripts' in file_path:
         pass
+    elif '.github/workflows' in file_path:
+        pass
 
     else:
         was_outside = True
