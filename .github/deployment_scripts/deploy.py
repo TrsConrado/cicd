@@ -21,6 +21,12 @@ account = os.environ['SNOWFLAKE_ACCOUNT']
 #                 account=account
 #                 )
 
-print(user)
-print(password)
-print(account)
+
+for a in user:
+    print(a)
+
+for b in password:
+    print(b)
+
+for c in account:
+    print(c)
