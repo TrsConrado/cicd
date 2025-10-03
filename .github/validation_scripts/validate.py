@@ -49,7 +49,9 @@ for file_path in file_path_list:
                     if column_num != -1:
                         print(f'Foi encontrado o termo proibido "{forbidden_term}" no arquivo "{file_path}", na linha {line_num+1} e coluna {column_num+1}')
     
-    elif '.github/validation_scripts':
+    elif '.github/validation_scripts' in file_path:
+        pass
+    elif '.github/deployment_scripts' in file_path:
         pass
 
     else:
