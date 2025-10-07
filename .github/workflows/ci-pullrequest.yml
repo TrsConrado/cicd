@@ -9,23 +9,13 @@ on:
       - '!dev'
 
 jobs:
-  open-pr:
+  productionPromotion:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
+      - name: Reset promotion branch
+        run: |
+          git fetch origin dev:dev
+          git reset --hard dev
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'feat: Automated PR creation'
-          title: 'Automated PR for new feature'
-          body: |
-            This PR was automatically created by GitHub Actions on a push to a feature branch.
-            Please review the changes.
-          branch: ${{ github.ref_name }}
-          base: dev
+        uses: peter-evans/create-pull-request@v7
