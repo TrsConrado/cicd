@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: dev
-      - name: Extract branch name
-        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-        id: extract_branch
+      #   with:
+      #     ref: dev
+      # - name: Extract branch name
+      #   run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      #   id: extract_branch
       # - name: Reset promotion branch
       #   run: |
       #     git fetch origin dev:dev
@@ -25,4 +25,5 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
-          branch: ${{ steps.extract_branch.outputs.branch }}
+          branch: dev
+          # branch: ${{ steps.extract_branch.outputs.branch }}
