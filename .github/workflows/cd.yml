@@ -1,15 +1,15 @@
-name: Continuous Integration Workflow
+name: Continuous Delivery Workflow
 
 on:
-  pull_request:
+  push:
     branches:
       - dev
       - homolog
       - main
 
 jobs:
-  CI_snowflake:
-    name: 'Run validation'
+  CD_snowflake:
+    name: 'Run scripts on Snowflake'
     defaults:
       run:
         shell: bash
@@ -33,5 +33,12 @@ jobs:
       with:
         python-version: '3.13' 
 
-    - name: 'Run Validation Script'
-      run: python .github/validation_scripts/validate.py "${{ steps.changed-files.outputs.all_changed_files }}" "${{ steps.extract_branch.outputs.branch }}"
+    - name: 'Install snowflake conector'
+      run: pip install snowflake-connector-python
+
+    - name: 'Run Deployment Scripts'
+      env:
+        SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+        SNOWFLAKE_PSWD: ${{ secrets.SNOWFLAKE_PSWD }}
+        SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      run: python .github/deployment_scripts/deploy.py "${{ steps.changed-files.outputs.all_changed_files }}" "${{ steps.extract_branch.outputs.branch }}"
