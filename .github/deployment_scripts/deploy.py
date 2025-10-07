@@ -16,7 +16,7 @@ user = os.environ['SNOWFLAKE_USER']
 password = os.environ['SNOWFLAKE_PSWD']
 account = os.environ['SNOWFLAKE_ACCOUNT']
 warehouse = os.environ['SNOWFLAKE_WAREHOUSE']
-database = os.environ['SNOWFLAKE_WAREHOUSE']
+database = os.environ['SNOWFLAKE_DATABASE']
 role = os.environ['SNOWFLAKE_ROLE']
 
 # with snowflake.connector.connect(
