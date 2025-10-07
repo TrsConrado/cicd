@@ -18,10 +18,10 @@ jobs:
       - name: Extract branch name
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
         id: extract_branch
-      - name: Reset promotion branch
-        run: |
-          git fetch origin dev:dev
-          git reset --hard dev
+      # - name: Reset promotion branch
+      #   run: |
+      #     git fetch origin dev:dev
+      #     git reset --hard dev
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
