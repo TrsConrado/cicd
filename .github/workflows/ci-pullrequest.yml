@@ -9,18 +9,20 @@ on:
       - '!dev'
 
 jobs:
-  Create-PR:
+  productionPromotion:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: dev
+      - name: Extract branch name
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+      - name: Reset promotion branch
+        run: |
+          git fetch origin ${{ steps.extract_branch.outputs.branch }}:${{ steps.extract_branch.outputs.branch }}
+          git reset --hard ${{ steps.extract_branch.outputs.branch }}
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'feat: Automated PR creation'
-          title: 'Automated PR'
-          body: |
-            This PR was automatically created by GitHub Actions on a push to a project branch.
-            Please review the changes.
-          branch: ${{ github.ref_name }}
-          base: dev
+          branch: dev
