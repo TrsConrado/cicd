@@ -26,6 +26,14 @@ jobs:
       #     git reset --hard dev
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
+        permissions:
+          contents: write
+          pull-requests: write
         with:
           base: dev
           branch: ${{ steps.extract_branch.outputs.branch }}
+      - name: Check outputs
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
