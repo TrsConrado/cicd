@@ -8,6 +8,9 @@ on:
       - '!homolog'
       - '!dev'
 
+permissions:
+  contents: write
+  pull-requests: write
 jobs:
   productionPromotion:
     runs-on: ubuntu-latest
@@ -26,9 +29,6 @@ jobs:
       #     git reset --hard dev
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
-        permissions:
-          contents: write
-          pull-requests: write
         with:
           base: dev
           branch: ${{ steps.extract_branch.outputs.branch }}
