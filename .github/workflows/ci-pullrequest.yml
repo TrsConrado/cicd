@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Checkout dev
+        run: git checkout dev
       # - name: Extract branch name
       #   run: |
       #     echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
@@ -27,8 +29,6 @@ jobs:
       #     git reset --hard ${{ steps.extract_branch.outputs.branch }}
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
-        with:
-          branch: dev
 
 # permissions:
 #   contents: write
