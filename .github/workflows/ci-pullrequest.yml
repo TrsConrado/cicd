@@ -16,8 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Checkout dev
-        run: git checkout dev
+        with:
+          ref: dev
       # - name: Extract branch name
       #   run: |
       #     echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
