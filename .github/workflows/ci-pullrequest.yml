@@ -28,6 +28,7 @@ jobs:
       #     git fetch origin dev:dev
       #     git reset --hard dev
       - name: Create Pull Request
+        id: cpr
         uses: peter-evans/create-pull-request@v7
         with:
           base: dev
