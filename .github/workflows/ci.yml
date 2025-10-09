@@ -40,11 +40,22 @@ jobs:
         run: |
           cd compare-branch
           git fetch
-          git diff --quiet dev...${{ github.ref_name }} || echo "diff_found=true" >> "$GITHUB_OUTPUT"
+          git diff --quiet dev...${{ github.ref_name }} || echo "dev_diff_found=true" >> "$GITHUB_OUTPUT"
+          git diff --quiet homolog...${{ github.ref_name }} || echo "hml_diff_found=true" >> "$GITHUB_OUTPUT"
+          git diff --quiet main...${{ github.ref_name }} || echo "main_diff_found=true" >> "$GITHUB_OUTPUT"
+          
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run subsequent steps if differences found
-        if: steps.diff_check.outputs.diff_found == 'true'
+        if: steps.diff_check.outputs.dev_diff_found == 'true'
         run: |
           echo "Differences detected on dev! Running subsequent actions..."
+          
+        if: steps.diff_check.outputs.hml_diff_found == 'true'
+        run: |
+          echo "Differences detected on homolog! Running subsequent actions..."
+          
+        if: steps.diff_check.outputs.main_diff_found == 'true'
+        run: |
+          echo "Differences detected on main! Running subsequent actions..."
