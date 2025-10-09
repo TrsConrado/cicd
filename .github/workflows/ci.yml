@@ -1,0 +1,48 @@
+name: Run on Branch Difference
+
+on:
+  push:
+    branches:
+      - '**'
+      - '!main'
+      - '!homolog'
+      - '!dev'
+
+jobs:
+  check_diff_and_run:
+    runs-on: ubuntu-latest
+    steps:
+      # - name: Checkout base dev branch
+      #   uses: actions/checkout@v4
+      #   with:
+      #     ref: dev
+      #     path: dev-branch
+
+      # - name: Checkout base homolog branch
+      #   uses: actions/checkout@v4
+      #   with:
+      #     ref: dev
+          
+      # - name: Checkout base main branch
+      #   uses: actions/checkout@v4
+      #   with:
+      #     ref: dev
+
+      - name: Checkout compare branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }} # The branch that triggered the push
+          path: compare-branch # Checkout to a separate directory
+
+      - name: Check for differences
+        id: diff_check
+        run: |
+          cd compare-branch
+          git diff --quiet dev...${{ github.ref_name }} || echo "diff_found=true" >> "$GITHUB_OUTPUT"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run subsequent steps if differences found
+        if: steps.diff_check.outputs.diff_found == 'true'
+        run: |
+          echo "Differences detected on dev! Running subsequent actions..."
