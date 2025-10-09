@@ -12,7 +12,7 @@ permissions:
   contents: write
   pull-requests: write
 jobs:
-  Create PR:
+  Create_PR:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
