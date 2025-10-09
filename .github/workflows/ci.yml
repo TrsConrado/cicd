@@ -37,6 +37,7 @@ jobs:
       - name: Check for differences
         id: diff_check
         run: |
+          git fetch
           cd compare-branch
           git diff --quiet dev...${{ github.ref_name }} || echo "diff_found=true" >> "$GITHUB_OUTPUT"
         env:
