@@ -16,8 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: CHG_proj1
       # - name: Extract branch name
       #   run: |
       #     echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
@@ -30,7 +28,7 @@ jobs:
       - name: Create Pull Request
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh pr create --title "PR TESTE" --body "CORPO DO PR TESTE"
+        run: gh pr create --title "PR TESTE" --body "CORPO DO PR TESTE" --base dev
 
 # permissions:
 #   contents: write
