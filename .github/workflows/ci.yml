@@ -51,11 +51,14 @@ jobs:
         if: steps.diff_check.outputs.dev_diff_found == 'true'
         run: |
           echo "Differences detected on dev! Running subsequent actions..."
+        fi
           
         if: steps.diff_check.outputs.hml_diff_found == 'true'
         run: |
           echo "Differences detected on homolog! Running subsequent actions..."
+        fi
           
         if: steps.diff_check.outputs.main_diff_found == 'true'
         run: |
           echo "Differences detected on main! Running subsequent actions..."
+        fi
