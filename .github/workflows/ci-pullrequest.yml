@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: dev
+          ref: CHG_proj1
       # - name: Extract branch name
       #   run: |
       #     echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
@@ -30,7 +30,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
-          branch: CHG_proj1
+          branch: dev
 
 # permissions:
 #   contents: write
