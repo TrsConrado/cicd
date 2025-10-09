@@ -1,39 +1,37 @@
-#  Comment since creating a PR from actions doesnt trigger this flow
+name: Continuous Integration - Scripts Validations - Workflow
 
-# name: Continuous Integration - Scripts Validations - Workflow
+on:
+  pull_request:
+    branches:
+      - dev
+      - homolog
+      - main
 
-# on:
-#   pull_request:
-#     branches:
-#       - dev
-#       - homolog
-#       - main
-
-# jobs:
-#   CI_snowflake:
-#     name: 'Run validation'
-#     defaults:
-#       run:
-#         shell: bash
+jobs:
+  CI_snowflake:
+    name: 'Run validation'
+    defaults:
+      run:
+        shell: bash
         
-#     runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     
-#     steps:
-#     - name: 'Checkout repository'
-#       uses: actions/checkout@v4
+    steps:
+    - name: 'Checkout repository'
+      uses: actions/checkout@v4
 
-#     - name: 'Get changed files'
-#       id: changed-files
-#       uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62
+    - name: 'Get changed files'
+      id: changed-files
+      uses: tj-actions/changed-files@24d32ffd492484c1d75e0c0b894501ddb9d30d62
 
-#     - name: Extract branch name
-#       run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
-#       id: extract_branch
+    - name: Extract branch name
+      run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      id: extract_branch
       
-#     - name: 'Install Python'
-#       uses: actions/setup-python@v6
-#       with:
-#         python-version: '3.13' 
+    - name: 'Install Python'
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.13' 
 
-#     - name: 'Run Validation Script'
-#       run: python .github/validation_scripts/validate.py "${{ steps.changed-files.outputs.all_changed_files }}" "${{ steps.extract_branch.outputs.branch }}"
+    - name: 'Run Validation Script'
+      run: python .github/validation_scripts/validate.py "${{ steps.changed-files.outputs.all_changed_files }}" "${{ steps.extract_branch.outputs.branch }}"
