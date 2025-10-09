@@ -34,6 +34,7 @@ jobs:
           ref: ${{ github.ref_name }} # The branch that triggered the push
           path: compare-branch # Checkout to a separate directory
 
+
       - name: Check for differences
         id: diff_check
         run: |
